@@ -91,8 +91,28 @@ class HTTParrotHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", len(msg))
         self.end_headers()
         self.wfile.write(msg)
+                
+    def do_HEAD(self):
         
+        try:                        
+            self.do_respone()
+        except Exception as e:
+            self.do_error(e)
+
+    def do_PUT(self):
         
+        try:                        
+            self.do_respone()
+        except Exception as e:
+            self.do_error(e)
+            
+    def do_DELETE(self):
+        
+        try:                        
+            self.do_respone()
+        except Exception as e:
+            self.do_error(e)
+                        
     def do_POST(self):
         
         try:                        
