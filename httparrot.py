@@ -122,7 +122,7 @@ if __name__ == "__main__":
         'echo': args.echo,
         'header': args.header,
         'body': args.body,
-        'time': True,#args.time,
+        'time': args.time,
         'status': args.status,
         'version': args.version
     }
