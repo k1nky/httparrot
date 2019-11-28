@@ -16,7 +16,7 @@ def get_args():
                         type=str, default=['localhost'], action="store", nargs=1, help="server address, default localhost")
     parser.add_argument("--echo", metavar="TYPE",
                         type=str, action="append", nargs='*', 
-                        help="""Echo types: 
+                        help="""echo types: 
                         headers - dump received headers,
                         body - dump received body,
                         query - dump request line,
