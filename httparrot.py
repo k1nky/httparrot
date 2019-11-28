@@ -11,9 +11,9 @@ def get_args():
     parser = argparse.ArgumentParser(description="Simple HTTP echo server", prog="httparrot.py",
                                      formatter_class=lambda prog: argparse.HelpFormatter(prog,max_help_position=40))
     parser.add_argument("--port", "-p", 
-                        type=int, default=8000, action="store", nargs=1, help="server port, default 8000")
+                        type=int, default=[8000], action="store", nargs=1, help="server port, default 8000")
     parser.add_argument("--address", "-a", 
-                        type=str, default="localhost", action="store", nargs=1, help="server address, default localhost")
+                        type=str, default=['localhost'], action="store", nargs=1, help="server address, default localhost")
     parser.add_argument("--echo", metavar="TYPE",
                         type=str, default=['all'], action="append", nargs='*', 
                         help="""Echo types: 
@@ -29,9 +29,9 @@ def get_args():
     parser.add_argument("--body", 
                         type=str, default="", action="store", nargs='*', help="extend response body")
     parser.add_argument("--status", "-s", 
-                        type=int, default=200, action="store", nargs=1, help="set response status, default 200")
+                        type=int, default=[200], action="store", nargs=1, help="set response status, default 200")
     parser.add_argument("--version", "-v", 
-                        type=int, default=1, action="store", nargs=1, help="set HTTP version, default - 1",
+                        type=int, default=[1], action="store", nargs=1, help="set HTTP version, default - 1",
                         choices=[1,0])
     parser.add_argument("--time", "-t", action="store_true", help="extend response body with current time")
     parser.add_argument("--silent", "-q", action="store_true", help="silent mode")
@@ -137,14 +137,14 @@ if __name__ == "__main__":
     
     silent_mode(args.silent)
 
-    httpd = ThreadedHTTPServer((args.address, args.port), HTTParrotHandler)
+    httpd = ThreadedHTTPServer((args.address[0], args.port[0]), HTTParrotHandler)
     HTTParrotHandler.config = {
         'echo': args.echo,
         'header': args.header,
         'body': args.body,
         'time': args.time,
-        'status': args.status,
-        'version': args.version
+        'status': args.status[0],
+        'version': args.version[0]
     }
     
     try:
