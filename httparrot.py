@@ -15,13 +15,13 @@ def get_args():
     parser.add_argument("--address", "-a", 
                         type=str, default=['localhost'], action="store", nargs=1, help="server address, default localhost")
     parser.add_argument("--echo", metavar="TYPE",
-                        type=str, default=['all'], action="append", nargs='*', 
+                        type=str, action="append", nargs='*', 
                         help="""Echo types: 
-                        headers - dump recieved headers,
-                        body - dump recieved body,
+                        headers - dump received headers,
+                        body - dump received body,
                         query - dump request line,
-                        none - no dump,
-                        all - dump all, default all
+                        none - no dump, default none
+                        all - dump all, 
                         """,
                         choices=['all', 'headers', 'body', 'query', 'none'])
     parser.add_argument("--header", 
@@ -55,6 +55,7 @@ class HTTParrotHandler(BaseHTTPRequestHandler):
     def prepare_msg(self):
         
         msg = '';
+        
         if self.check_opt_echo('all') or self.check_opt_echo('headers'):
             msg += str(self.headers)
         if self.check_opt_echo('all') or self.check_opt_echo('query'):
@@ -62,8 +63,12 @@ class HTTParrotHandler(BaseHTTPRequestHandler):
         if self.check_opt_echo('all') or self.check_opt_echo('body'):
             if 'Content-Length' in self.headers:
                 msg += str(self.rfile.read(int(self.headers['Content-Length']))) + "\n"
+                
         if self.config['time']:
             msg += str(int(time.time())) + "\n"
+            
+        for body in self.config['body']:
+            msg += body + '\n'            
         
         return bytes(msg + "\n", 'utf-8')
         
@@ -76,10 +81,12 @@ class HTTParrotHandler(BaseHTTPRequestHandler):
             self.protocol_version = "HTTP/1.1"
         else:
             self.protocol_version = "HTTP/1.0"
+            
         self.send_response(self.config['status'])
+        
         for header in self.config['header']:            
             self.send_header(*self.parse_opt_header(header))
-            
+                        
         self.send_header("Content-Length", len(msg))
         self.end_headers()
         self.wfile.write(msg)
@@ -139,7 +146,7 @@ if __name__ == "__main__":
 
     httpd = ThreadedHTTPServer((args.address[0], args.port[0]), HTTParrotHandler)
     HTTParrotHandler.config = {
-        'echo': args.echo,
+        'echo': args.echo[0],
         'header': args.header,
         'body': args.body,
         'time': args.time,
