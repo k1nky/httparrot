@@ -9,7 +9,7 @@ httparrot.py [-h] [--port PORT] [--address ADDRESS]
                     [--echo [TYPE [TYPE ...]]]
                     [--header [HEADER [HEADER ...]]]
                     [--body [BODY [BODY ...]]] [--status STATUS]
-                    [--version {1,0}] [--time] [--silent]
+                    [--version {1.0,1.1,2}] [--time] [--silent]
 </pre>
 
 Arguments: 
@@ -19,14 +19,14 @@ Arguments:
 * *echo* - list of  echo message types: headers - include request headers in echo response, body - include request body in echo response, query - include request line in echo response, all - include all in echo response, none - no include
 * *header* - list extending the response headers
 * *body* - echo response body
-* *version* - HTTP version
+* *version* - HTTP version, default 1.1
 * *time* - include current time in echo response body
 * *silent* - silent mode
 * *status* - response code status
 
 #### Examples
 
-$ ./httparrot.py -p 8010 -v 0
+$ ./httparrot.py -p 8010 -v 1.0
 
 <pre>
 $ curl -v localhost:8010/test?q=1

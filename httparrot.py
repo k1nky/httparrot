@@ -3,8 +3,8 @@
 import argparse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
-import time
 import sys
+import time
    
 def get_args():
     
@@ -31,8 +31,8 @@ def get_args():
     parser.add_argument("--status", "-s", 
                         type=int, default=[200], action="store", nargs=1, help="set response status, default 200")
     parser.add_argument("--version", "-v", 
-                        type=int, default=[1], action="store", nargs=1, help="set HTTP version, default - 1",
-                        choices=[1,0])
+                        type=str, default=['1.1'], action="store", nargs=1, help="set HTTP version, default - 1.1",
+                        choices=['1.1','1.0','2'])
     parser.add_argument("--time", "-t", action="store_true", help="extend response body with current time")
     parser.add_argument("--silent", "-q", action="store_true", help="silent mode")
     
@@ -77,11 +77,7 @@ class HTTParrotHandler(BaseHTTPRequestHandler):
         
         msg = self.prepare_msg();
         
-        if self.config['version'] == 1:
-            self.protocol_version = "HTTP/1.1"
-        else:
-            self.protocol_version = "HTTP/1.0"
-            
+        self.protocol_version = "HTTP/{}".format(self.config['version'])           
         self.send_response(self.config['status'])
         
         for header in self.config['header']:            
