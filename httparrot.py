@@ -14,7 +14,7 @@ def get_args():
                         type=int, default=[8000], action="store", nargs=1, help="server port, default 8000")
     parser.add_argument("--address", "-a", 
                         type=str, default=['localhost'], action="store", nargs=1, help="server address, default localhost")
-    parser.add_argument("--echo", metavar="TYPE",
+    parser.add_argument("--echo", metavar="TYPE", default=["none"],
                         type=str, action="append", nargs='*', 
                         help="""echo types: 
                         headers - dump received headers,
