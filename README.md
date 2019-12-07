@@ -36,7 +36,8 @@ $ curl -v localhost:8010/test?q=1
 > User-Agent: curl/7.52.1
 > Accept: */*
 > 
-< <b>HTTP/1.0</b> 200 OK						# -v 1.0
+<i># -v 1.0</i>
+< <b>HTTP/1.0</b> 200 OK	
 < Server: BaseHTTP/0.6 Python/3.5.3
 < Date: Thu, 28 Nov 2019 19:07:59 GMT
 < Content-Type: text/html
@@ -56,18 +57,24 @@ $ curl -v localhost:8010/test?q=1
 < HTTP/1.1 200 OK
 < Server: BaseHTTP/0.6 Python/3.5.3
 < Date: Thu, 28 Nov 2019 19:07:59 GMT
-< <b>Connection: keep-alive</b>					# --header "Connection: keep-alive" 
-< <b>Content-Type: text/html</b>				# --header "Content-Type: text/html" 
+<i># --header "Connection: keep-alive"</i>
+< <b>Connection: keep-alive</b>
+<i># --header "Content-Type: text/html"</i>
+< <b>Content-Type: text/html</b> 
 < Content-Length: 96
 < 
 
-<b>Host: localhost:8010</b>						# --echo headers
-<b>User-Agent: curl/7.52.1</b>					#
-<b>Accept: */*</b>								#
+<i># --echo headers</i>
+<b>Host: localhost:8010</b>
+<b>User-Agent: curl/7.52.1</b>
+<b>Accept: */*</b>
 
-<b>GET /test?q=1 HTTP/1.1</b>				 	# --echo query
-<b>1574968079</b>								# --time
-<b>OK</b>										# --body OK
+<i># --echo query</i>
+<b>GET /test?q=1 HTTP/1.1</b>
+<i># --time</i>
+<b>1574968079</b>
+<i># --body OK</i>
+<b>OK</b>
 </b>
 </pre>
 
@@ -81,10 +88,12 @@ $ curl -L -v localhost:8000/any-query --silent
 > User-Agent: curl/7.52.1
 > Accept: */*
 > 
-< HTTP/1.1 <b>301</b> Moved Permanently			# -s 301
+<i># -s 301</i>
+< HTTP/1.1 <b>301</b> Moved Permanently
 < Server: BaseHTTP/0.6 Python/3.5.3
 < Date: Sat, 07 Dec 2019 08:35:03 GMT
-< <b>Location: http://example.com</b>			# --header "Location: http://example.com"
+<i># --header "Location: http://example.com"</i>
+< <b>Location: http://example.com</b>
 < Content-Length: 1
 < 
 ...
