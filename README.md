@@ -26,7 +26,7 @@ Arguments:
 
 #### Examples
 
-$ ./httparrot.py -p 8010 -v 1.0
+* `$ ./httparrot.py -p 8010 -v 1.0`
 
 <pre>
 $ curl -v localhost:8010/test?q=1
@@ -36,14 +36,14 @@ $ curl -v localhost:8010/test?q=1
 > User-Agent: curl/7.52.1
 > Accept: */*
 > 
-< HTTP/1.0 200 OK
+< <b>HTTP/1.0</b> 200 OK						# -v 1.0
 < Server: BaseHTTP/0.6 Python/3.5.3
 < Date: Thu, 28 Nov 2019 19:07:59 GMT
 < Content-Type: text/html
 < 
 </pre>
 
-$ ./httparrot.py -p 8010 --body OK --echo headers query --header "Connection: keep-alive" "Content-Type: text/html" --time
+* `$ ./httparrot.py -p 8010 --body OK --echo headers query --header "Connection: keep-alive" "Content-Type: text/html" --time`
 
 <pre>
 $ curl -v localhost:8010/test?q=1
@@ -56,18 +56,49 @@ $ curl -v localhost:8010/test?q=1
 < HTTP/1.1 200 OK
 < Server: BaseHTTP/0.6 Python/3.5.3
 < Date: Thu, 28 Nov 2019 19:07:59 GMT
-< Connection: keep-alive
-< Content-Type: text/html
+< <b>Connection: keep-alive</b>					# --header "Connection: keep-alive" 
+< <b>Content-Type: text/html</b>				# --header "Content-Type: text/html" 
 < Content-Length: 96
 < 
-Host: localhost:8010
-User-Agent: curl/7.52.1
-Accept: */*
 
-GET /test?q=1 HTTP/1.1
-1574968079
-OK
+<b>Host: localhost:8010</b>						# --echo headers
+<b>User-Agent: curl/7.52.1</b>					#
+<b>Accept: */*</b>								#
 
+<b>GET /test?q=1 HTTP/1.1</b>				 	# --echo query
+<b>1574968079</b>								# --time
+<b>OK</b>										# --body OK
+</b>
 </pre>
 
+* `$ ./httparrot.py -s 301 --header "Location: http://example.com"`
 
+<pre>
+$ curl -L -v localhost:8000/any-query --silent
+
+> GET /any-query HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/7.52.1
+> Accept: */*
+> 
+< HTTP/1.1 <b>301</b> Moved Permanently			# -s 301
+< Server: BaseHTTP/0.6 Python/3.5.3
+< Date: Sat, 07 Dec 2019 08:35:03 GMT
+< <b>Location: http://example.com</b>			# --header "Location: http://example.com"
+< Content-Length: 1
+< 
+...
+* Issue another request to this URL: 'http://example.com'
+* Rebuilt URL to: http://example.com/
+*   Trying 93.184.216.34...
+* TCP_NODELAY set
+* Connected to example.com (93.184.216.34) port 80 (#1)
+> GET / HTTP/1.1
+> Host: example.com
+> User-Agent: curl/7.52.1
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+...
+
+</pre>

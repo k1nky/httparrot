@@ -50,7 +50,7 @@ class HTTParrotHandler(BaseHTTPRequestHandler):
     config = {}
     
     check_opt_echo = lambda self, x: x in self.config['echo']
-    parse_opt_header = lambda self, s: tuple( map(lambda x: x.replace(" ",""), s.split(":")) )
+    parse_opt_header = lambda self, s: tuple( map(lambda x: x.replace(" ",""), s.split(": ")) )
 
     def prepare_msg(self):
         
