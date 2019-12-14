@@ -14,8 +14,8 @@ def get_args():
                         type=int, default=[8000], action="store", nargs=1, help="server port, default 8000")
     parser.add_argument("--address", "-a", 
                         type=str, default=['localhost'], action="store", nargs=1, help="server address, default localhost")
-    parser.add_argument("--echo", metavar="TYPE", default=["none"],
-                        type=str, action="append", nargs='*', 
+    parser.add_argument("--echo", metavar="TYPE", default=[],
+                        type=str, action="append",  
                         help="""echo types: 
                         headers - dump received headers,
                         body - dump received body,
@@ -142,7 +142,7 @@ if __name__ == "__main__":
 
     httpd = ThreadedHTTPServer((args.address[0], args.port[0]), HTTParrotHandler)
     HTTParrotHandler.config = {
-        'echo': args.echo[0],
+        'echo': args.echo,
         'header': args.header,
         'body': args.body,
         'time': args.time,
