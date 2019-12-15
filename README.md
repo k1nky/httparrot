@@ -44,7 +44,7 @@ $ curl -v localhost:8010/test?q=1
 < 
 </pre>
 
-* `$ ./httparrot.py -p 8010 --body OK --echo headers query --header "Connection: keep-alive" "Content-Type: text/html" --time`
+* `$ ./httparrot.py -p 8010 --body OK --echo headers --echo query --header "Connection: keep-alive" "Content-Type: text/html" --time`
 
 <pre>
 $ curl -v localhost:8010/test?q=1
