@@ -16,12 +16,12 @@ Arguments:
 
 * *port* - server listen port, default 8000
 * *address* - server address, default localhost
-* *echo* - list of  echo message types: headers - include request headers in echo response, body - include request body in echo response, query - include request line in echo response, all - include all in echo response, none - no include
-* *header* - list extending the response headers
+* *echo* - echo message types (list): headers - include request headers, body - include request body, query - include request line, client - include client connection, all - include all, none - no include
+* *header* - response headers (list)
 * *body* - echo response body
 * *version* - HTTP version, default 1.1
-* *time* - include current time in echo response body
-* *silent* - silent mode
+* *time* - insert current time into echo response body
+* *silent* - enable silent mode
 * *status* - response code status
 
 #### Examples
