@@ -1,5 +1,3 @@
-#### About
-
 **HTTParrot** is http echo server which can be used when debugging, configure or testing your infrastructure. The utility is built on native Python3 classes and does not need any dependencies.
 
 #### Usage
